@@ -3,17 +3,55 @@ using UnityEngine;
 
 public class TileDeck : MonoBehaviour
 {
-    public GameObject[] tilePrefabs; // Array of tile prefabs to deal
+    public List<GameObject> tilePrefabs; // All possible tile prefabs
+    private List<GameObject> deck = new List<GameObject>();
 
-    // Function to deal a hand of tiles (for both player and AI)
-    public List<GameObject> DealHand()
+    void Start()
+    {
+        // Create deck at start
+        CreateDeck();
+    }
+
+    void CreateDeck()
+    {
+        deck.Clear();
+
+        // Add one copy of each tilePrefab (or more if needed)
+        foreach (GameObject tile in tilePrefabs)
+        {
+            deck.Add(tile);
+        }
+
+        Shuffle(deck);
+    }
+
+    void Shuffle(List<GameObject> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            GameObject temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+    }
+
+    public GameObject DrawTile()
+    {
+        if (deck.Count == 0) return null;
+
+        GameObject drawnTile = deck[0];
+        deck.RemoveAt(0);
+        return drawnTile;
+    }
+
+    public List<GameObject> DealHand(int count = 5)
     {
         List<GameObject> hand = new List<GameObject>();
 
-        for (int i = 0; i < 13; i++) // A Mahjong hand typically has 13 tiles
+        for (int i = 0; i < count && deck.Count > 0; i++)
         {
-            int randomIndex = Random.Range(0, tilePrefabs.Length);
-            hand.Add(tilePrefabs[randomIndex]);
+            hand.Add(DrawTile());
         }
 
         return hand;

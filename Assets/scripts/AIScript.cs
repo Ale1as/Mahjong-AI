@@ -1,52 +1,54 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class AIScript : MonoBehaviour
 {
-    public GameObject[] handTiles; // Array to hold the AI's hand tiles
-    private GameManager gameManager; // Reference to the GameManager
+    public GameObject[] handTiles;
+    public Transform aiHandContainer;
+    private TileDeck tileDeck;
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>(); // Get the GameManager reference
+        tileDeck = FindObjectOfType<TileDeck>();
     }
 
-    // Update function to simulate AI's turn
-    void Update()
+    public void TakeTurn()
     {
-        if (!gameManager.isPlayerTurn) // If it's the AI's turn
-        {
-            // AI randomly discards a tile after a short delay to simulate thinking
-            StartCoroutine(AIDiscardTile());
-        }
+        StartCoroutine(DelayedAIMove());
     }
 
-    // Coroutine to simulate the AI discarding a tile after a short delay
-    IEnumerator AIDiscardTile()
+    private IEnumerator DelayedAIMove()
     {
-        // Wait for a short time (simulating AI thinking)
         yield return new WaitForSeconds(1f);
+
+        GameObject drawn = tileDeck.DrawTile();
+        if (drawn != null)
+        {
+            GameObject newTile = Instantiate(drawn, aiHandContainer.position + Vector3.right * handTiles.Length * 1.5f, Quaternion.identity);
+            newTile.transform.SetParent(aiHandContainer);
+
+            List<GameObject> newHand = new List<GameObject>(handTiles);
+            newHand.Add(newTile);
+            handTiles = newHand.ToArray();
+
+            Debug.Log("AI drew: " + newTile.name);
+        }
 
         if (handTiles.Length > 0)
         {
-            // Pick a random tile to discard
             int randomIndex = Random.Range(0, handTiles.Length);
             GameObject tileToDiscard = handTiles[randomIndex];
 
-            // Remove the tile from the AI's hand array
+            Debug.Log("AI discards: " + tileToDiscard.name);
+
             List<GameObject> handList = new List<GameObject>(handTiles);
             handList.RemoveAt(randomIndex);
             handTiles = handList.ToArray();
 
-            // Destroy the tile from the scene
             Destroy(tileToDiscard);
-
-            // Log the AI's action for debugging
-            Debug.Log("AI discarded: " + tileToDiscard.name);
-
-            // Switch turn after discarding
-            gameManager.SwitchTurn();
         }
+
+        FindObjectOfType<GameManager>().SwitchTurn();
     }
 }

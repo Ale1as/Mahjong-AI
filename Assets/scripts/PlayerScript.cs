@@ -3,36 +3,55 @@ using System.Collections.Generic;
 
 public class PlayerScript : MonoBehaviour
 {
-    public GameObject[] handTiles; // Array to hold the player's hand tiles
-    private GameManager gameManager; // Reference to the GameManager
+    public GameObject[] handTiles;
+    public Transform playerHandContainer;
+    private GameManager gameManager;
+    private TileDeck tileDeck;
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>(); // Get the GameManager reference
+        gameManager = FindObjectOfType<GameManager>();
+        tileDeck = FindObjectOfType<TileDeck>();
     }
 
-    // Function to handle player tile click and discard
-    void OnMouseDown()
+    void Update()
     {
-        if (gameManager.isPlayerTurn && !transform.IsChildOf(GameObject.Find("AIHand").transform))
+        if (!gameManager.isPlayerTurn) return;
+
+        if (Input.GetMouseButtonDown(0))
         {
-            // Handle tile discard logic
-            DiscardTile(gameObject);
-            gameManager.SwitchTurn(); // Switch turn after discarding
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.transform.IsChildOf(playerHandContainer))
+                {
+                    GameObject selected = hit.transform.gameObject;
+                    Debug.Log("Player discards: " + selected.name);
+
+                    List<GameObject> handList = new List<GameObject>(handTiles);
+                    handList.Remove(selected);
+                    handTiles = handList.ToArray();
+
+                    Destroy(selected);
+
+                    gameManager.SwitchTurn();
+                }
+            }
         }
     }
 
-    void DiscardTile(GameObject tile)
+    public void DrawTile()
     {
-        // Remove the tile from the player's hand
-        List<GameObject> handList = new List<GameObject>(handTiles);
-        handList.Remove(tile);
-        handTiles = handList.ToArray();
+        GameObject drawn = tileDeck.DrawTile();
+        if (drawn == null) return;
 
-        // Destroy the tile from the scene
-        Destroy(tile);
+        GameObject newTile = Instantiate(drawn, playerHandContainer.position + Vector3.right * handTiles.Length * 1.5f, Quaternion.identity);
+        newTile.transform.SetParent(playerHandContainer);
 
-        // Log the discard for debugging
-        Debug.Log("Player discarded: " + tile.name);
+        List<GameObject> newHand = new List<GameObject>(handTiles);
+        newHand.Add(newTile);
+        handTiles = newHand.ToArray();
+
+        Debug.Log("Player drew: " + newTile.name);
     }
 }

@@ -165,6 +165,7 @@ MonoBehaviour:
   - {fileID: 3092140951596791258, guid: 2e7e306c75569014988d78ad372ddf38, type: 3}
   - {fileID: 304961624327604439, guid: 512384fa2411bbf47b2db32104650523, type: 3}
   - {fileID: 226487734380887976, guid: 986a989b885679d43a37df95f812f268, type: 3}
+  aiHandContainer: {fileID: 39269953}
 --- !u!4 &39269953
 Transform:
   m_ObjectHideFlags: 0
@@ -175,6 +176,67 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &317206837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 317206839}
+  - component: {fileID: 317206838}
+  m_Layer: 0
+  m_Name: Tile Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &317206838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317206837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 671805cf862e37844960c4cedbb605fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilePrefabs:
+  - {fileID: 5587870157702531733, guid: 527471ff4c7a6504398f4376e48d2b81, type: 3}
+  - {fileID: 4148178800362431335, guid: bb1e4dc18a625574faefc36c41032c63, type: 3}
+  - {fileID: 8410904126646192537, guid: f9e54c3137216fd4c983800d3793b686, type: 3}
+  - {fileID: 5326619987205717278, guid: d1d0e0ff0d2a00244a8560763aa88c9f, type: 3}
+  - {fileID: 1251637573743069590, guid: 24e2834d9481c7b4a904892dc42aa58f, type: 3}
+  - {fileID: 1739750770873748008, guid: 952562463287dc14bad4ed3264a85893, type: 3}
+  - {fileID: 2594774717251633305, guid: 1054f9ee0f15cd542892d089cfeb3259, type: 3}
+  - {fileID: 4076672415687991500, guid: 731dc8cdbccbcb64ea7ee9d481622be4, type: 3}
+  - {fileID: 2916159068071363538, guid: 309a3617650a6bb48a3b0837445a2e46, type: 3}
+  - {fileID: 4344904543578227673, guid: a5daf418ba080c04891250ff0d7e39bf, type: 3}
+  - {fileID: 7778159824442954796, guid: fc2145c2e6ebb1c4b92d9073a46f5aef, type: 3}
+  - {fileID: 7379697241004365303, guid: bb841fa1550432b4eb1b7672b0630a1e, type: 3}
+  - {fileID: 6567531192274805284, guid: 130ecac81ea7cc44198e432d391f3b10, type: 3}
+  - {fileID: 3092140951596791258, guid: 2e7e306c75569014988d78ad372ddf38, type: 3}
+  - {fileID: 304961624327604439, guid: 512384fa2411bbf47b2db32104650523, type: 3}
+  - {fileID: 226487734380887976, guid: 986a989b885679d43a37df95f812f268, type: 3}
+--- !u!4 &317206839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317206837}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.099297, y: -0.7232403, z: -9.95403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -294,6 +356,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -419,6 +482,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c336ccde79098fc4fa03c8c2a5516df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &596421359
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +540,7 @@ MonoBehaviour:
   - {fileID: 3092140951596791258, guid: 2e7e306c75569014988d78ad372ddf38, type: 3}
   - {fileID: 304961624327604439, guid: 512384fa2411bbf47b2db32104650523, type: 3}
   - {fileID: 226487734380887976, guid: 986a989b885679d43a37df95f812f268, type: 3}
+  playerHandContainer: {fileID: 596421361}
 --- !u!4 &596421361
 Transform:
   m_ObjectHideFlags: 0
@@ -712,7 +788,7 @@ GameObject:
   - component: {fileID: 1070647187}
   m_Layer: 0
   m_Name: Game Manager
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -732,6 +808,7 @@ MonoBehaviour:
   isPlayerTurn: 1
   playerScript: {fileID: 596421360}
   aiScript: {fileID: 39269952}
+  tileDeck: {fileID: 317206838}
 --- !u!4 &1070647188
 Transform:
   m_ObjectHideFlags: 0
@@ -837,3 +914,4 @@ SceneRoots:
   - {fileID: 416034273}
   - {fileID: 1841927791}
   - {fileID: 1070647188}
+  - {fileID: 317206839}

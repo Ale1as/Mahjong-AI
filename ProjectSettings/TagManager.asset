@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerTile
   - AITile
+  - Tile
   layers:
   - Default
   - TransparentFX
